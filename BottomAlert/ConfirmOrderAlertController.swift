@@ -21,7 +21,7 @@ class ConfirmOrderAlertController: LeftTitledAlertController {
     var orderPrice: String
     
     override var contentHeight: CGFloat {
-        return topSafeAreaInset + 10
+        return titleInset + 10
             + orderDestination.height(withConstrainedWidth: view.frame.width - 40, font: UIFont.systemFont(ofSize: 17)) + 10
             + orderPrice.height(withConstrainedWidth: view.frame.width - 40, font: UIFont.boldSystemFont(ofSize: 20)) + 10
             + 116 + 10 + 30
@@ -36,7 +36,7 @@ class ConfirmOrderAlertController: LeftTitledAlertController {
     override func setup(contentView: UIView) {
         super.setup(contentView: contentView)
         
-        destinationLabel = UILabel(frame: CGRect(x: 20, y: topSafeAreaInset + 20, width: contentView.frame.width - 40, height: orderDestination.height(withConstrainedWidth: view.frame.width, font: UIFont.systemFont(ofSize: 17))))
+        destinationLabel = UILabel(frame: CGRect(x: 20, y: titleInset + 20, width: contentView.frame.width - 40, height: orderDestination.height(withConstrainedWidth: view.frame.width, font: UIFont.systemFont(ofSize: 17))))
         destinationLabel.text = "Deliver to " + orderDestination
         destinationLabel.textColor = .gray
         destinationLabel.font = UIFont.systemFont(ofSize: 17)
