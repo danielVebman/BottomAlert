@@ -14,7 +14,7 @@ class LeftTitledAlertController: BottomAlertController {
     
     private(set) var titleText: String
     
-    var topSafeAreaInset: CGFloat {
+    var titleInset: CGFloat {
         return 20 + titleText.height(withConstrainedWidth: CGFloat.greatestFiniteMagnitude, font: UIFont.boldSystemFont(ofSize: 30))
     }
     

@@ -22,8 +22,8 @@ class BottomAlertController: UIViewController {
     var canTapBackgroundToDismiss = true
     var canSwipeToDismiss = true
     
-    var bottomSafeAreaInset: CGFloat {
-        return UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+    private var bottomInset: CGFloat {
+        return max(UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0, 10)
     }
     
     init() {
@@ -47,14 +47,14 @@ class BottomAlertController: UIViewController {
         backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
         view.addSubview(backgroundView)
         
-        containerView = UIView(frame: CGRect(x: 0, y: view.frame.height, width: view.frame.width, height: contentHeight))
+        containerView = UIView(frame: CGRect(x: 10, y: view.frame.height, width: view.frame.width - 20, height: contentHeight))
         containerView.layer.cornerRadius = 30
         containerView.addDropShadow()
         view.addSubview(containerView)
         
         contentView = UIView(frame: containerView.bounds)
         contentView.backgroundColor = .white
-        contentView.round(corners: [.topLeft, .topRight], radius: 30)
+        contentView.layer.cornerRadius = 30
         containerView.addSubview(contentView)
         setup(contentView: contentView)
     }
@@ -67,7 +67,7 @@ class BottomAlertController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
             self.backgroundView.alpha = 1
-            self.containerView.frame.origin.y = self.view.frame.height - self.contentHeight
+            self.containerView.frame.origin.y = self.view.frame.height - self.contentHeight - self.bottomInset
         })
     }
     
@@ -85,18 +85,18 @@ class BottomAlertController: UIViewController {
             let translation = gesture.translation(in: gesture.view).y
             if translation > 0 {
                 backgroundView.alpha = 1 - translation / contentHeight
-                containerView.frame.origin.y = view.frame.height - contentHeight + translation
+                containerView.frame.origin.y = view.frame.height - contentHeight - bottomInset + translation
             }
         case .ended:
             let velocity = gesture.velocity(in: gesture.view).y
             if velocity > 1500 {
-                let distanceToMove = view.frame.height - containerView.frame.origin.y
+                let distanceToMove = view.frame.height - containerView.frame.origin.y - bottomInset
                 let duration = Double(distanceToMove / velocity)
                 dismiss(duration: duration)
             } else {
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
                     self.backgroundView.alpha = 1
-                    self.containerView.frame.origin.y = self.view.frame.height - self.contentHeight
+                    self.containerView.frame.origin.y = self.view.frame.height - self.contentHeight - self.bottomInset
                 })
             }
         default:

@@ -24,7 +24,7 @@ class ConfirmOrderAlertController: LeftTitledAlertController {
         return topSafeAreaInset + 10
             + orderDestination.height(withConstrainedWidth: view.frame.width - 40, font: UIFont.systemFont(ofSize: 17)) + 10
             + orderPrice.height(withConstrainedWidth: view.frame.width - 40, font: UIFont.boldSystemFont(ofSize: 20)) + 10
-            + 116 + bottomSafeAreaInset + 10 + 30
+            + 116 + 10 + 30
     }
     
     init(orderDestination: String, orderPrice: Double) {
@@ -60,7 +60,7 @@ class ConfirmOrderAlertController: LeftTitledAlertController {
         cancelButton.setTitleColor(.gray, for: .normal)
         cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         cancelButton.sizeToFit()
-        cancelButton.center = CGPoint(x: contentView.frame.midX, y: contentView.frame.height - cancelButton.frame.height / 2 - bottomSafeAreaInset - 5)
+        cancelButton.center = CGPoint(x: contentView.frame.midX, y: contentView.frame.height - cancelButton.frame.height / 2 - 10)
         cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
         contentView.addSubview(cancelButton)
         
