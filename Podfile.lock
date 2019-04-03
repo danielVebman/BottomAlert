@@ -1,0 +1,16 @@
+PODS:
+  - AutoCompleteTextField (0.3.0)
+
+DEPENDENCIES:
+  - AutoCompleteTextField
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AutoCompleteTextField
+
+SPEC CHECKSUMS:
+  AutoCompleteTextField: decf3e8eb7029ffd0a7932761edf64b7238d0c36
+
+PODFILE CHECKSUM: e474d128d1120919e903cfd079ecc7aa946fa919
+
+COCOAPODS: 1.5.3

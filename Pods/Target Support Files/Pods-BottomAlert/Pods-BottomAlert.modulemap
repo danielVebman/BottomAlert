@@ -1,0 +1,6 @@
+framework module Pods_BottomAlert {
+  umbrella header "Pods-BottomAlert-umbrella.h"
+
+  export *
+  module * { export * }
+}
