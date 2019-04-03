@@ -13,7 +13,8 @@ import UIKit
 class BottomAlertController: UIViewController {
     private var backgroundView: UIView!
     private var containerView: UIView!
-    private var contentView: UIView!
+    
+    var contentView: UIView!
     
     var contentHeight: CGFloat {
         return 300
@@ -37,7 +38,8 @@ class BottomAlertController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    /// Be sure to call superview.DidLoad() before doing anything.
+    open override func viewDidLoad() {
         view.backgroundColor = .clear
         view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(swipe(_:))))
         
@@ -56,16 +58,10 @@ class BottomAlertController: UIViewController {
         contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 30
         containerView.addSubview(contentView)
-        setup(contentView: contentView)
-    }
-    
-    /// Override this function to setup the alert's contents.
-    open func setup(contentView: UIView) {
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: .curveEaseOut, animations: {
             self.backgroundView.alpha = 1
             self.containerView.frame.origin.y = self.view.frame.height - self.contentHeight - self.bottomInset
         })
@@ -94,7 +90,7 @@ class BottomAlertController: UIViewController {
                 let duration = Double(distanceToMove / velocity)
                 dismiss(duration: duration)
             } else {
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: .curveEaseOut, animations: {
                     self.backgroundView.alpha = 1
                     self.containerView.frame.origin.y = self.view.frame.height - self.contentHeight - self.bottomInset
                 })

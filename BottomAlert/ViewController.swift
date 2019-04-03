@@ -9,11 +9,13 @@
 import UIKit
 
 class ViewController: UIViewController {
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func viewDidLoad() {
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showAlert)))
+    }
+    
+    @objc func showAlert() {
         let alert = ConfirmOrderAlertController(orderDestination: "6923 SE 35th St.", orderPrice: 22.13)
         present(alert, animated: false, completion: nil)
-        
-        print(UIScreen.main.scale)
     }
 }
 

@@ -1,4 +1,4 @@
-platform :ios, '12.2'
+platform :ios, '11.0'
 
 target 'BottomAlert' do
   use_frameworks!
