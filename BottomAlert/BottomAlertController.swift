@@ -38,7 +38,7 @@ class BottomAlertController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /// Be sure to call superview.DidLoad() before doing anything.
+    /// Be sure to call super.viewDidLoad() before trying to access `contentView`.
     open override func viewDidLoad() {
         view.backgroundColor = .clear
         view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(swipe(_:))))
@@ -79,10 +79,8 @@ class BottomAlertController: UIViewController {
         switch gesture.state {
         case .changed:
             let translation = gesture.translation(in: gesture.view).y
-            if translation > 0 {
-                backgroundView.alpha = 1 - translation / contentHeight
-                containerView.frame.origin.y = view.frame.height - contentHeight - bottomInset + translation
-            }
+            backgroundView.alpha = translation > 0 ? 1 - translation / contentHeight : 1
+            containerView.frame.origin.y = view.frame.height - contentHeight - bottomInset + translation / (translation > 0 ? 1 : 4)
         case .ended:
             let velocity = gesture.velocity(in: gesture.view).y
             if velocity > 1500 {

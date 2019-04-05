@@ -331,7 +331,7 @@ open class AutoCompleteTextField: UITextField {
         if frame.height > defaultAutoCompleteButtonHeight {
             buttonFrameH = defaultAutoCompleteButtonHeight
             buttonOriginY = (frame.height - defaultAutoCompleteButtonHeight) / 2
-        }else{
+        } else {
             buttonFrameH = frame.height
             buttonOriginY = 0
         }

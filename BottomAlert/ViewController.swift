@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     }
     
     @objc func showAlert() {
-        let alert = ConfirmOrderAlertController(orderDestination: "6923 SE 35th St.", orderPrice: 22.13)
+        let alert = ConfirmOrderAlertController(orderDestination: "6923 SE 35th St.", orderPrice: "$22.13", creditDigits: "1928")
         present(alert, animated: false, completion: nil)
     }
 }

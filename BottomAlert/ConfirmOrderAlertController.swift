@@ -19,6 +19,7 @@ class ConfirmOrderAlertController: LeftTitledAlertController {
     
     var orderDestination: String
     var orderPrice: String
+    var creditDigits: String
     
     override var contentHeight: CGFloat {
         return titleInset + 10
@@ -27,9 +28,10 @@ class ConfirmOrderAlertController: LeftTitledAlertController {
             + 110 + 10 + 30
     }
     
-    init(orderDestination: String, orderPrice: Double) {
+    init(orderDestination: String, orderPrice: String, creditDigits: String) {
         self.orderDestination = orderDestination
-        self.orderPrice = "$\(orderPrice)"
+        self.orderPrice = orderPrice
+        self.creditDigits = creditDigits
         super.init(title: "Order for delivery")
     }
     
@@ -53,7 +55,7 @@ class ConfirmOrderAlertController: LeftTitledAlertController {
         contentView.addSubview(totalPriceLabel)
         
         paymentMethodLabel = UILabel()
-        paymentMethodLabel.text = "prepaid with •••• •••• •••• 1928."
+        paymentMethodLabel.text = "prepaid with •••• •••• •••• \(creditDigits)."
         paymentMethodLabel.font = UIFont.systemFont(ofSize: 15)
         paymentMethodLabel.textColor = .gray
         paymentMethodLabel.sizeToFit()
