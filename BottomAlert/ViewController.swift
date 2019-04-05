@@ -14,7 +14,20 @@ class ViewController: UIViewController {
     }
     
     @objc func showAlert() {
-        let alert = ConfirmOrderAlertController(orderDestination: "6923 SE 35th St.", orderPrice: "$22.13", creditDigits: "1928")
+        let alert = TwoButtonAlertController()
+        alert.button1.setImage(#imageLiteral(resourceName: "person"), for: .normal)
+        alert.button1.setTitle("Pickup", for: .normal)
+        alert.button2.setImage(#imageLiteral(resourceName: "bike"), for: .normal)
+        alert.button2.setTitle("Delivery", for: .normal)
+        alert.dismissCompletionBlock = { button in
+            if button == 1 {
+                let alert2 = ConfirmOrderAlertController(type: .pickup, orderTime: "2:00pm", orderDestination: nil, orderPrice: "$22.13", creditDigits: "1928")
+                self.present(alert2, animated: false, completion: nil)
+            } else if button == 2 {
+                let alert2 = ConfirmOrderAlertController(type: .delivery, orderTime: nil, orderDestination: "6923 SE 35th St.", orderPrice: "$22.13", creditDigits: "1928")
+                self.present(alert2, animated: false, completion: nil)
+            }
+        }
         present(alert, animated: false, completion: nil)
     }
 }

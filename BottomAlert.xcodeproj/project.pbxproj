@@ -15,6 +15,7 @@
 		06AEE28C22507930008050AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06AEE28B22507930008050AF /* Assets.xcassets */; };
 		06AEE28F22507930008050AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06AEE28D22507930008050AF /* LaunchScreen.storyboard */; };
 		06AEE29722507941008050AF /* BottomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AEE29622507941008050AF /* BottomAlertController.swift */; };
+		06D236DC2256E70900BB2736 /* TwoButtonAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D236DB2256E70900BB2736 /* TwoButtonAlertController.swift */; };
 		C19E97A7657F6B7DA3E39420 /* Pods_BottomAlert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968341644F7FCE64C293AA9F /* Pods_BottomAlert.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		06AEE28E22507930008050AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		06AEE29022507930008050AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06AEE29622507941008050AF /* BottomAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAlertController.swift; sourceTree = "<group>"; };
+		06D236DB2256E70900BB2736 /* TwoButtonAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoButtonAlertController.swift; sourceTree = "<group>"; };
 		06FB7E9722518004007AD6EC /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0F663C89F0340BD31399C096 /* Pods-BottomAlert.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BottomAlert.release.xcconfig"; path = "Pods/Target Support Files/Pods-BottomAlert/Pods-BottomAlert.release.xcconfig"; sourceTree = "<group>"; };
 		968341644F7FCE64C293AA9F /* Pods_BottomAlert.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BottomAlert.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +72,7 @@
 			children = (
 				06AEE2842250792F008050AF /* AppDelegate.swift */,
 				06AEE2862250792F008050AF /* ViewController.swift */,
+				06D236DB2256E70900BB2736 /* TwoButtonAlertController.swift */,
 				0685456622509D58003573C2 /* ConfirmOrderAlertController.swift */,
 				0685456822509DDD003573C2 /* LeftTitledAlertController.swift */,
 				06AEE29622507941008050AF /* BottomAlertController.swift */,
@@ -214,6 +217,7 @@
 				0685456922509DDD003573C2 /* LeftTitledAlertController.swift in Sources */,
 				06AEE2872250792F008050AF /* ViewController.swift in Sources */,
 				06AEE2852250792F008050AF /* AppDelegate.swift in Sources */,
+				06D236DC2256E70900BB2736 /* TwoButtonAlertController.swift in Sources */,
 				0685456722509D58003573C2 /* ConfirmOrderAlertController.swift in Sources */,
 				06AEE29722507941008050AF /* BottomAlertController.swift in Sources */,
 			);

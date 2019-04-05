@@ -61,9 +61,12 @@ class BottomAlertController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: .curveEaseOut, animations: {
-            self.backgroundView.alpha = 1
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: [.curveEaseOut, .allowUserInteraction], animations: {
             self.containerView.frame.origin.y = self.view.frame.height - self.contentHeight - self.bottomInset
+        })
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.backgroundView.alpha = 1
         })
     }
     
@@ -88,9 +91,12 @@ class BottomAlertController: UIViewController {
                 let duration = Double(distanceToMove / velocity)
                 dismiss(duration: duration)
             } else {
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: .curveEaseOut, animations: {
-                    self.backgroundView.alpha = 1
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: .allowUserInteraction, animations: {
                     self.containerView.frame.origin.y = self.view.frame.height - self.contentHeight - self.bottomInset
+                })
+                
+                UIView.animate(withDuration: 0.5, delay: 0, options: .allowUserInteraction, animations: {
+                    self.backgroundView.alpha = 1
                 })
             }
         default:
@@ -98,12 +104,14 @@ class BottomAlertController: UIViewController {
         }
     }
     
-    @objc public func dismiss(duration: Double = 0.3) {
+    @objc public func dismiss(duration: Double = 0.3, completion: (() -> ())? = nil) {
         UIView.animate(withDuration: duration, animations: {
             self.backgroundView.alpha = 0
             self.containerView.frame.origin.y = self.view.frame.height
         }) { (_) in
-            self.dismiss(animated: false, completion: nil)
+            self.dismiss(animated: true, completion: {
+                completion?()
+            })
         }
     }
     

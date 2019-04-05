@@ -10,29 +10,46 @@ import Foundation
 import UIKit
 
 class ConfirmOrderAlertController: LeftTitledAlertController {
-    var destinationLabel: UILabel!
+    enum OrderType {
+        case delivery, pickup
+    }
+    
+    private(set) var type: OrderType
+    
+    var detailLabel: UILabel!
     var totalPriceLabel: UILabel!
     var paymentMethodLabel: UILabel!
     
     var confirmButton = UIButton(type: .roundedRect)
     var cancelButton = UIButton(type: .system)
     
-    var orderDestination: String
+    var orderDestination: String?
+    var orderTime: String?
     var orderPrice: String
     var creditDigits: String
     
     override var contentHeight: CGFloat {
-        return titleInset + 10
-            + orderDestination.height(withConstrainedWidth: view.frame.width - 40, font: UIFont.systemFont(ofSize: 15)) + 10
-            + orderPrice.height(withConstrainedWidth: view.frame.width - 40, font: UIFont.boldSystemFont(ofSize: 18)) + 5
-            + 110 + 10 + 30
+        if type == .delivery {
+            return titleInset + 10
+                + orderDestination!.height(withConstrainedWidth: view.frame.width - 40, font: UIFont.systemFont(ofSize: 15)) + 10
+                + orderPrice.height(withConstrainedWidth: view.frame.width - 40, font: UIFont.boldSystemFont(ofSize: 18)) + 5
+                + 110 + 10 + 30
+        } else {
+            return titleInset + 10
+                + orderTime!.height(withConstrainedWidth: view.frame.width - 40, font: UIFont.systemFont(ofSize: 15)) + 10
+                + orderPrice.height(withConstrainedWidth: view.frame.width - 40, font: UIFont.boldSystemFont(ofSize: 18)) + 5
+                + 110 + 10 + 30
+        }
     }
     
-    init(orderDestination: String, orderPrice: String, creditDigits: String) {
+    // This has to be restructured to not be idiotic.
+    init(type: OrderType, orderTime: String?, orderDestination: String?, orderPrice: String, creditDigits: String) {
+        self.type = type
+        self.orderTime = orderTime
         self.orderDestination = orderDestination
         self.orderPrice = orderPrice
         self.creditDigits = creditDigits
-        super.init(title: "Order for delivery")
+        super.init(title: "Order for " + (type == .delivery ? "delivery" : "pickup"))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,20 +59,25 @@ class ConfirmOrderAlertController: LeftTitledAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        destinationLabel = UILabel(frame: CGRect(x: 20, y: titleInset + 20, width: contentView.frame.width - 40, height: orderDestination.height(withConstrainedWidth: view.frame.width, font: UIFont.systemFont(ofSize: 17))))
-        destinationLabel.text = "Deliver to " + orderDestination
-        destinationLabel.textColor = .gray
-        destinationLabel.font = UIFont.systemFont(ofSize: 15)
-        contentView.addSubview(destinationLabel)
+        if type == .delivery {
+            detailLabel = UILabel(frame: CGRect(x: 20, y: titleInset + 20, width: contentView.frame.width - 40, height: orderDestination!.height(withConstrainedWidth: view.frame.width, font: UIFont.systemFont(ofSize: 17))))
+            detailLabel.text = "Deliver to " + orderDestination!
+        } else {
+            detailLabel = UILabel(frame: CGRect(x: 20, y: titleInset + 20, width: contentView.frame.width - 40, height: orderTime!.height(withConstrainedWidth: view.frame.width, font: UIFont.systemFont(ofSize: 17))))
+            detailLabel.text = "Pickup at " + orderTime!
+        }
+        detailLabel.textColor = .gray
+        detailLabel.font = UIFont.systemFont(ofSize: 15)
+        contentView.addSubview(detailLabel)
         
-        totalPriceLabel = UILabel(frame: CGRect(x: 20, y: destinationLabel.frame.maxY + 5, width: 0, height: 0))
+        totalPriceLabel = UILabel(frame: CGRect(x: 20, y: detailLabel.frame.maxY + 5, width: 0, height: 0))
         totalPriceLabel.font = UIFont.boldSystemFont(ofSize: 18)
         totalPriceLabel.text = orderPrice
         totalPriceLabel.sizeToFit()
         contentView.addSubview(totalPriceLabel)
         
         paymentMethodLabel = UILabel()
-        paymentMethodLabel.text = "prepaid with •••• •••• •••• \(creditDigits)."
+        paymentMethodLabel.text = "prepaid with •••• •••• •••• \(creditDigits)"
         paymentMethodLabel.font = UIFont.systemFont(ofSize: 15)
         paymentMethodLabel.textColor = .gray
         paymentMethodLabel.sizeToFit()
